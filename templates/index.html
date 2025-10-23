@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom-Based Doctor Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>Symptom-Based Doctor Recommender 🩺</h1>
+    </header>
+
+    <div class="container">
+        <div class="input-col">
+            <h2>🧑‍⚕️ Your Information</h2>
+
+            <label for="symptoms-select">What symptoms are you experiencing?</label>
+            <select id="symptoms-select" multiple>
+                {% for symptom in symptoms %}
+                    <option value="{{ symptom }}">{{ symptom.replace('_', ' ') | title }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="location-input">Enter your City or Zip Code:</label>
+            <input type="text" id="location-input" placeholder="e.g., 'New Delhi' or '221002'">
+
+            <button id="predict-btn">Find a Doctor</button>
+        </div>
+
+        <div class="results-col">
+            <h2>✨ Recommendations</h2>
+
+            <div id="results-container">
+
+                <div id="loader" class="loader hidden"></div>
+
+                <div id="initial-message">
+                    <p>Your results will appear here.</p>
+                    <p class="disclaimer">ℹ️ <b>Disclaimer:</b> This tool is for informational purposes only and is not a substitute for professional medical advice.</p>
+                </div>
+
+                <div id="results-content"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

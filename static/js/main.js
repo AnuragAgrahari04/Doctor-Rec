@@ -1,13 +1,6 @@
 // Wait for the entire page to load before running our script
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. INITIALIZE SLIM SELECT ---
-    // This finds your <select> and transforms it.
-    new SlimSelect({
-        select: '#symptoms-select',
-        placeholder: 'Click to select symptoms' // Adds a nice placeholder
-    });
-
     // Get references to all the HTML elements we need
     const predictBtn = document.getElementById('predict-btn');
     const symptomsSelect = document.getElementById('symptoms-select');
@@ -20,11 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     predictBtn.addEventListener('click', () => {
 
         // 1. Get the user's inputs
-
-        // --- 2. UPDATE HOW WE GET SYMPTOMS ---
-        // We no longer read from "selectedOptions". Slim Select gives us the values directly.
-        const selectedSymptoms = symptomsSelect.value; // This is now much simpler!
-
+        // Get all selected options from the dropdown
+        const selectedSymptoms = Array.from(symptomsSelect.selectedOptions).map(option => option.value);
         const location = locationInput.value;
 
         // 2. Validate the inputs
